@@ -11,6 +11,7 @@ import java.util.List;
 public class CustomerController extends Controller {
 
     public Result list(){
+        return ok();
     }
 
     public Result show(Long id){

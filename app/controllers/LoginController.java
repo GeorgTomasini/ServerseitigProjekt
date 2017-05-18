@@ -1,6 +1,8 @@
 package controllers;
 
+import com.google.inject.Inject;
 import models.User;
+import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -11,6 +13,8 @@ import java.util.List;
  */
 public class LoginController extends Controller {
 
+    @Inject
+    public FormFactory formFactory;
 
     public Result login(){
 
@@ -18,9 +22,10 @@ public class LoginController extends Controller {
 
         for(User u : usersList)
         {
+
             if(u.getEmail().equals(email) && u.getPassoword().equals(password))
             {
-                return ok(view.reder.);
+                return ok();
             }
         }
 
