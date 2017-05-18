@@ -1,0 +1,21 @@
+@(userList: List[User])
+
+@main("Produkte"){
+    <h1>Produkte</h1>
+    @if(userList.size() > 0) {
+        @for(user <- userList) {
+            <div class="warehouse-item">
+            @user
+            </div>
+        }
+    } else{
+        <div class="warehouse-item">
+            Kein Produkt vorhanden
+        </div>
+    }
+
+    <div class="new-holder">
+        <a href="@routes.FormController.addProduct" class="btn btn-success"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Neues Produkt anlegen</a>
+    </div>
+
+}
