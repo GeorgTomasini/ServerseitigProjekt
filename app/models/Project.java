@@ -16,8 +16,21 @@ public class Project extends Model
 
     private String name;
     private String description;
-
-
+    
+    @ManyToOne
+    private User user;
+    
+    
+    public User getUser()
+    {
+        return user;
+    }
+    
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+    
     public static Finder<String, Project> find = new Finder<String, Project>(Project.class);
 
     public long getId()

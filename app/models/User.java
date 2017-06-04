@@ -42,12 +42,12 @@ public class User extends Model {
         this.email = email;
     }
 
-    public String getPassoword()
+    public String getPassword()
     {
         return passoword;
     }
 
-    public void setPassoword(String passoword)
+    public void setPassword(String passoword)
     {
         this.passoword = passoword;
     }

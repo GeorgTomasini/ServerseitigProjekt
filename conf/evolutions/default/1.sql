@@ -3,78 +3,52 @@
 
 # --- !Ups
 
-create table user (
-  product_id                    bigint auto_increment not null,
-  ean                           varchar(255),
+create table project (
+  project_id                    bigint auto_increment not null,
   name                          varchar(255),
   description                   varchar(255),
-  image                         varbinary(255),
-  constraint pk_product primary key (product_id)
+  user_user_id                  bigint,
+  constraint pk_project primary key (project_id)
 );
 
-create table product_tag (
-  product_product_id            bigint not null,
-  tag_tag_id                    bigint not null,
-  constraint pk_product_tag primary key (product_product_id,tag_tag_id)
+create table task (
+  task_id                       bigint auto_increment not null,
+  title                         varchar(255),
+  duration                      integer,
+  description                   varchar(255),
+  project_project_id            bigint,
+  constraint ck_task_duration check (duration in (0,1,2)),
+  constraint pk_task primary key (task_id)
 );
 
-create table stock_item (
-  stockitem_id                  bigint auto_increment not null,
-  warehouse_warehouse_id        bigint,
-  product_product_id            bigint,
-  quantity                      bigint,
-  constraint pk_stock_item primary key (stockitem_id)
+create table user (
+  user_id                       bigint auto_increment not null,
+  email                         varchar(255),
+  passoword                     varchar(255),
+  role                          varchar(255),
+  firstname                     varchar(255),
+  lastname                      varchar(255),
+  constraint pk_user primary key (user_id)
 );
 
-create table tag (
-  tag_id                        bigint auto_increment not null,
-  name                          varchar(255),
-  constraint pk_tag primary key (tag_id)
-);
+alter table project add constraint fk_project_user_user_id foreign key (user_user_id) references user (user_id) on delete restrict on update restrict;
+create index ix_project_user_user_id on project (user_user_id);
 
-create table warehouse (
-  warehouse_id                  bigint auto_increment not null,
-  name                          varchar(255),
-  street                        varchar(255),
-  postal_code                   varchar(255),
-  city                          varchar(255),
-  constraint pk_warehouse primary key (warehouse_id)
-);
-
-alter table product_tag add constraint fk_product_tag_product foreign key (product_product_id) references user (product_id) on delete restrict on update restrict;
-create index ix_product_tag_product on product_tag (product_product_id);
-
-alter table product_tag add constraint fk_product_tag_tag foreign key (tag_tag_id) references tag (tag_id) on delete restrict on update restrict;
-create index ix_product_tag_tag on product_tag (tag_tag_id);
-
-alter table stock_item add constraint fk_stock_item_warehouse_warehouse_id foreign key (warehouse_warehouse_id) references warehouse (warehouse_id) on delete restrict on update restrict;
-create index ix_stock_item_warehouse_warehouse_id on stock_item (warehouse_warehouse_id);
-
-alter table stock_item add constraint fk_stock_item_product_product_id foreign key (product_product_id) references user (product_id) on delete restrict on update restrict;
-create index ix_stock_item_product_product_id on stock_item (product_product_id);
+alter table task add constraint fk_task_project_project_id foreign key (project_project_id) references project (project_id) on delete restrict on update restrict;
+create index ix_task_project_project_id on task (project_project_id);
 
 
 # --- !Downs
 
-alter table product_tag drop foreign key fk_product_tag_product;
-drop index ix_product_tag_product on product_tag;
+alter table project drop foreign key fk_project_user_user_id;
+drop index ix_project_user_user_id on project;
 
-alter table product_tag drop foreign key fk_product_tag_tag;
-drop index ix_product_tag_tag on product_tag;
+alter table task drop foreign key fk_task_project_project_id;
+drop index ix_task_project_project_id on task;
 
-alter table stock_item drop foreign key fk_stock_item_warehouse_warehouse_id;
-drop index ix_stock_item_warehouse_warehouse_id on stock_item;
+drop table if exists project;
 
-alter table stock_item drop foreign key fk_stock_item_product_product_id;
-drop index ix_stock_item_product_product_id on stock_item;
+drop table if exists task;
 
 drop table if exists user;
-
-drop table if exists product_tag;
-
-drop table if exists stock_item;
-
-drop table if exists tag;
-
-drop table if exists warehouse;
 

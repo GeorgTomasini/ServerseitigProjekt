@@ -21,5 +21,10 @@ public class CustomerController extends Controller {
     public Result create(){
         return ok();
     }
+    
+    public Result delteCustomer(){return ok();}
+    
+    public Result modifyCustomer() {return ok();}
+    
 
 }

@@ -19,8 +19,20 @@ public class Task extends Model
     private String title;
     private JsonConfig.DateTime duration;
     private String description;
-
-
+    
+    @ManyToOne
+    private Project project;
+    
+    public Project getProject()
+    {
+        return project;
+    }
+    
+    public void setProject(Project project)
+    {
+        this.project = project;
+    }
+    
     public static Finder<String, Task> find = new Finder<String, Task>(Task.class);
 
     public Task(String title, JsonConfig.DateTime duration, String description)

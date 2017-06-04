@@ -16,14 +16,14 @@ public class LoginController extends Controller {
     @Inject
     public FormFactory formFactory;
 
-    public Result login(){
+    public Result login(String email, String password){
 
         List<User> usersList = User.find.all();
 
         for(User u : usersList)
         {
 
-            if(u.getEmail().equals(email) && u.getPassoword().equals(password))
+            if(u.getEmail().equals(email) && u.getPassword().equals(password))
             {
                 return ok();
             }
