@@ -1,0 +1,39 @@
+@(customer: Customer)
+
+
+@main("Kunden"){
+    <h1>@customer.getName()</h1>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Name</td>
+                        <td>Branche</td>
+            <tbody>
+                <tr>
+                    <td>@customer.getId()</td>
+                    <td>@customer.getName()</td>
+                    <td>
+                        <ul>
+                        @for(project <- customer.getProjects()){
+                            <li>@project.getName()</li>
+                        }
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="row back">
+        <div class="col-xs-12">
+            <a href="@routes.CustomerController.list()"><i class="fa fa-caret-left" aria-hidden="true"></i> Zurück</a>
+        </div>
+    </div>
+
+}

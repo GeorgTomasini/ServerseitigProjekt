@@ -1,0 +1,22 @@
+@(employeeForm: play.data.Form[Employee])
+
+@main("Neuer Mitarbeiter"){
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Neuer Mitarbeiter</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+        @helper.form(action = routes.EmployeeController.create(), 'enctype -> "multipart/form-data"){
+            @helper.inputText(employeeForm("vorname"), 'id -> "vorname", '_label -> "Vorname", 'class -> "form-control")
+            @helper.inputText(employeeForm("nachname"), '_label -> "Nachname", 'class -> "form-control")
+            @helper.inputText(employeeForm("Abteilung"), '_label -> "Abteilung", 'class -> "form-control", 'type -> "textarea")
+
+            <button type="submit" class="btn btn-success" value="Anlegen" ><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Anlegen </button>
+        }
+        </div>
+    </div>
+
+}

@@ -1,7 +1,9 @@
 package controllers;
 
 import com.google.inject.Inject;
+import models.Customer;
 import models.Project;
+import models.Task;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -18,27 +20,28 @@ public class ProjectController extends Controller
         @Inject
         public FormFactory formFactory;
     
-    public Result listProjects()
+    public Result list()
     {
         
         List<Project> projectList = Project.find.all();
         
         
-        return ok();
+        return ok(views.html.projectList.render(projectList));
         
     }
 
-    public Result createProject()
+    public Result create()
     {
     
         Form<Project> projectForm = formFactory.form(Project.class);
-    
         Project project = projectForm.bindFromRequest().get();
+        project.setCustomer(Customer.find.byId(project.getTmpcustomer()));
+        
         project.save();
-        return ok();
+        return redirect(routes.ProjectController.list());
     }
     
-    public Result modifyProject(String id)
+    public Result modify(String id)
     {
         Form<Project> projectForm = formFactory.form(Project.class);
     
@@ -57,9 +60,9 @@ public class ProjectController extends Controller
             {
                 project.setName(projectTemp.getName());
             }
-            else if(!project.getUser().equals(projectTemp.getUser()))
+            else if(!project.getCustomer().equals(projectTemp.getCustomer()))
             {
-                project.setUser(projectTemp.getUser());
+                project.setCustomer(projectTemp.getCustomer());
             }
         }
     
@@ -67,24 +70,27 @@ public class ProjectController extends Controller
         return ok();
     }
     
-    public Result showProject(String id)
+    public Result show(String id)
     {
         Project project = Project.find.byId(id);
-        
-        
-        return ok();
+                
+        return ok(views.html.project.render(project));
     }
   
-    public Result deleteProject(String id)
+    public Result delete(String id)
     {
-        
         Project project = Project.find.byId(id);
         project.delete();
     
-        return ok();
+        return redirect(routes.ProjectController.list());
     }
     
-    
+    public Result search(String name){
+        
+        List<Project> projectList = Project.find.where().contains("name", name).findList();
+
+        return ok(views.html.projectList.render(projectList));
+    }
     
     
 }

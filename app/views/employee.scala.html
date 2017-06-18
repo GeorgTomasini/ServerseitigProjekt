@@ -1,0 +1,34 @@
+@(employee: Employee)
+
+
+@main("Mitarbeiter"){
+    <h1>@employee.getFirstname() @employee.getLastname()</h1>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Vorname</td>
+                        <td>Nachname</td>
+                        <td>Abteilung</td>
+            <tbody>
+                <tr>
+                    <td>@employee.getId()</td>
+                    <td>@employee.getFirstname()</td>
+                    <td>@employee.getLastname()</td>
+                    <td>@employee.getRole()</td>
+            </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="row back">
+        <div class="col-xs-12">
+            <a href="@routes.EmployeeController.list()"><i class="fa fa-caret-left" aria-hidden="true"></i> Zurück</a>
+        </div>
+    </div>
+
+}

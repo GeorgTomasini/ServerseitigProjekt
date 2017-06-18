@@ -12,16 +12,28 @@ import javax.persistence.*;
 public class Task extends Model
 {
     @Id
-
     @Column(name="task_id")
     private long id;
 
     private String title;
-    private JsonConfig.DateTime duration;
+    private Long duration;
     private String description;
     
     @ManyToOne
     private Project project;
+    
+    @Transient
+    private String tmpproject;
+    
+    public String getTmpproject()
+    {
+        return tmpproject;
+    }
+    
+    public void setTmpproject(String tmpproject)
+    {
+        this.tmpproject = tmpproject;
+    }
     
     public Project getProject()
     {
@@ -34,14 +46,7 @@ public class Task extends Model
     }
     
     public static Finder<String, Task> find = new Finder<String, Task>(Task.class);
-
-    public Task(String title, JsonConfig.DateTime duration, String description)
-    {
-        this.title = title;
-        this.duration = duration;
-        this.description = description;
-    }
-
+    
     public Task()
     {
     }
@@ -51,10 +56,6 @@ public class Task extends Model
         return id;
     }
 
-    public void setId(long id)
-    {
-        this.id = id;
-    }
 
     public String getTitle()
     {
@@ -66,12 +67,12 @@ public class Task extends Model
         this.title = title;
     }
 
-    public JsonConfig.DateTime getDuration()
+    public Long getDuration()
     {
         return duration;
     }
 
-    public void setDuration(JsonConfig.DateTime duration)
+    public void setDuration(Long duration)
     {
         this.duration = duration;
     }

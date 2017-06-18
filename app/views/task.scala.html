@@ -1,0 +1,37 @@
+@(task: Task)
+
+
+@main("Aufgaben"){
+    <h1>@task.getTitle()</h1>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Name</td>
+                        <td>Beschreibung</td>
+                        <td>Dauer</td>
+                        <td>Projekt</td>
+            <tbody>
+                <tr>
+                    <td>@task.getId()</td>
+                    <td>@task.getTitle()</td>
+                    <td>@task.getDescription()</td>
+                    <td>@task.getDuration()</td>
+                    <td>@task.getProject().getName()</td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="row back">
+        <div class="col-xs-12">
+            <a href="@routes.TaskController.list()"><i class="fa fa-caret-left" aria-hidden="true"></i> Zurück</a>
+        </div>
+    </div>
+
+}

@@ -1,0 +1,69 @@
+@(projectList: List[Project])
+
+
+@main("Projekte"){
+    <h1>Projekte</h1>
+
+    @*Search Area*@
+    <div class="row">
+        <div class="col-xs-12">
+            <input type="text" id="searchparam" placeholder="Suchbegriff"/>
+            <button id="searchbtn" class="btn btn-success">Suchen</button>
+        </div>
+    </div>
+    <script>
+            $('#searchbtn').click(function(){
+                var prm = $('#searchparam').val();
+//                alert(prm);
+                window.location = "/projectsearch/" + prm;
+            });
+    </script>
+    @if(projectList.size() > 0) {
+
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Name</td>
+                            <td>Beschreibung</td>
+                            <td>Projektdauer</td>
+                            <td>Kunde</td>
+                            <td>Aufgaben</td>
+                <tbody>
+                    @for(project <- projectList){
+                        <tr>
+                            <td>@project.getId()</td>
+                            <td>@project.getName()</td>
+                            <td>@project.getDescription()</td>
+                            <td>@project.projectDuration()</td>
+                            <td>@project.getCustomer.getName()</td>
+                            <td>
+                                <ul>
+                                @for(task <- project.getTasks()){
+                                    <li>@task.getTitle()</li>
+                                }
+                                </ul>
+                            </td>
+                            <td>
+                                <a href="@routes.ProjectController.show(String.valueOf(project.getId()))" class="btn btn-danger"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a>
+                                <a href="@routes.ProjectController.delete(String.valueOf(project.getId()))" class="btn btn-danger"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                </table>
+            </div>
+        </div>
+    } else{
+        <div class="warehouse-item">
+            Kein Projekte vorhanden
+        </div>
+    }
+    <div class="new-holder">
+        <a href="@routes.FormController.addProject()" class="btn btn-success"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Neues Projekt anlegen</a>
+    </div>
+    <br>
+
+}

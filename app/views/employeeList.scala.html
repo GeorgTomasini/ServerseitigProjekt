@@ -1,0 +1,52 @@
+@(employeeList: List[Employee])
+
+@main("Employee"){
+    <h1>Mitarbeiter</h1>
+    @if(employeeList.size() > 0) {
+
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Vorname</td>
+                            <td>Nachname</td>
+                            <td>Abteilung</td>
+                            <td>Arbeitszeit</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @for(employee <- employeeList){
+                        <tr>
+                            <td>@employee.getId()</td>
+                            <td>@employee.getFirstname()</td>
+                            <td>@employee.getLastname()</td>
+                            <td>@employee.getRole()</td>
+                            <td>
+
+                                <a href="@routes.EmployeeController.show(String.valueOf(employee.getId()))" class="btn btn-danger"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a>
+                                <a href="@routes.EmployeeController.delete(String.valueOf(employee.getId()))" class="btn btn-danger"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>
+
+                            </td>
+
+
+                        </tr>
+
+                    }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    } else{
+        <div class="warehouse-item">
+            Kein Mitarbeiter vorhanden
+        </div>
+    }
+
+    <div class="new-holder">
+        <a href="@routes.FormController.addEmployee()" class="btn btn-success"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Neuen Mitarbeiter anlegen</a>
+    </div>
+
+}R

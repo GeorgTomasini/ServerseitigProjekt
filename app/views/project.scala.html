@@ -1,0 +1,45 @@
+@(project: Project)
+
+
+@main("Projekte"){
+    <h1>@project.getName</h1>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Name</td>
+                        <td>Beschreibung</td>
+                        <td>Projektdauer</td>
+                        <td>Kunde</td>
+                        <td>Aufgaben</td>
+            <tbody>
+                <tr>
+                    <td>@project.getId()</td>
+                    <td>@project.getName()</td>
+                    <td>@project.getDescription</td>
+                    <td>@project.projectDuration()</td>
+                    <td>@project.getCustomer.getName()</td>
+                    <td>
+                        <ul>
+                        @for(task <- project.getTasks()){
+                            <li>@task.getTitle()</li>
+                        }
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="row back">
+        <div class="col-xs-12">
+            <a href="@routes.ProjectController.list()"><i class="fa fa-caret-left" aria-hidden="true"></i> Zurück</a>
+        </div>
+    </div>
+
+}

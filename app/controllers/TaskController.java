@@ -1,6 +1,7 @@
 package controllers;
 
 import com.google.inject.Inject;
+import models.Project;
 import models.Task;
 import play.data.Form;
 import play.data.FormFactory;
@@ -18,27 +19,28 @@ public class TaskController extends Controller {
     @Inject
     public FormFactory formFactory;
     
-    public Result listTasks()
+    public Result list()
     {
         
         List<Task> taskList = Task.find.all();
         
         
-        return ok();
+        return ok(views.html.taskList.render(taskList));
         
     }
     
-    public Result createTask()
+    public Result create()
     {
         
         Form<Task> taskForm = formFactory.form(Task.class);
         
         Task task = taskForm.bindFromRequest().get();
+        task.setProject(Project.find.byId(task.getTmpproject()));
         task.save();
-        return ok();
+        return redirect(routes.TaskController.list());
     }
     
-    public Result modifyTask(String id)
+    public Result modify(String id)
     {
         Form<Task> taskForm = formFactory.form(Task.class);
         
@@ -71,20 +73,20 @@ public class TaskController extends Controller {
         return ok();
     }
     
-    public Result showTask(String id)
+    public Result show(String id)
     {
         Task task = Task.find.byId(id);
         
         
-        return ok();
+        return ok(views.html.task.render(task));
     }
     
-    public Result deleteTask(String id)
+    public Result delete(String id)
     {
         
         Task task = Task.find.byId(id);
         task.delete();
         
-        return ok();
+        return redirect(routes.TaskController.list());
     }
 }

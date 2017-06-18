@@ -3,11 +3,42 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.UserController.index
+GET     /                           controllers.HomeController.index
 
 
+#Forms
+GET     /addCustomer                        controllers.FormController.addCustomer()
+GET     /addProject                         controllers.FormController.addProject()
+GET     /addTask                            controllers.FormController.addTask()
+GET     /addEmployee                        controllers.FormController.addEmployee()
 
 
+#Customer
+GET     /customer                            controllers.CustomerController.list()
+GET     /customer/:id                        controllers.CustomerController.show(id: String)
+POST    /customer                            controllers.CustomerController.create()
+GET     /deletecustomer/:id                  controllers.CustomerController.delete(id: String)
+
+
+#Task
+GET     /task                               controllers.TaskController.list()
+GET     /task/:id                           controllers.TaskController.show(id: String)
+POST    /task                               controllers.TaskController.create()
+GET     /deletetask/:id                     controllers.TaskController.delete(id: String)
+
+
+#Employee
+GET     /employee                             controllers.EmployeeController.list()
+GET     /employee/:id                         controllers.EmployeeController.show(id: String)
+POST    /employee                             controllers.EmployeeController.create()
+GET     /deleteemployee/:id                   controllers.EmployeeController.delete(id: String)
+
+#Project
+GET     /project                            controllers.ProjectController.list()
+GET     /project/:id                        controllers.ProjectController.show(id: String)
+GET     /projectsearch/:name                controllers.ProjectController.search(name: String)
+POST    /project                            controllers.ProjectController.create()
+GET     /deleteproject/:id                  controllers.ProjectController.delete(id: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
