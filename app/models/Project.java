@@ -15,6 +15,7 @@ public class Project extends Model
     @Column(name="project_id")
     private long id;
 
+    
     private String name;
     private String description;
     

@@ -6,7 +6,6 @@
 create table customer (
   customer_id                   bigint auto_increment not null,
   name                          varchar(255),
-  password                      varchar(255),
   constraint pk_customer primary key (customer_id)
 );
 

@@ -17,6 +17,8 @@ public class Employee extends Model {
     private String firstname;
     private String lastname;
 
+    
+    
     public static Finder<String, Employee> find = new Finder<String, Employee>(Employee.class);
 
     public Long getId()

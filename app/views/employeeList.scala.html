@@ -13,7 +13,6 @@
                             <td>Vorname</td>
                             <td>Nachname</td>
                             <td>Abteilung</td>
-                            <td>Arbeitszeit</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,7 +24,7 @@
                             <td>@employee.getRole()</td>
                             <td>
 
-                                <a href="@routes.EmployeeController.show(String.valueOf(employee.getId()))" class="btn btn-danger"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a>
+                                <a href="@routes.EmployeeController.show(String.valueOf(employee.getId()))" class="btn btn-default"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a>
                                 <a href="@routes.EmployeeController.delete(String.valueOf(employee.getId()))" class="btn btn-danger"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>
 
                             </td>

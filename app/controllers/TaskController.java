@@ -69,8 +69,8 @@ public class TaskController extends Controller {
             }
         }
         
-        
-        return ok();
+        task.update();
+        return redirect(routes.TaskController.list());
     }
     
     public Result show(String id)

@@ -11,10 +11,7 @@
         <div class="col-xs-12">
         @helper.form(action = routes.ProjectController.create(), 'enctype -> "multipart/form-data"){
             @helper.inputText(projectForm("name"), 'id -> "name", '_label -> "Name", 'class -> "form-control")
-            @helper.inputText(projectForm("beschreibung"), '_label -> "Beschreibung", 'class -> "form-control")
-            @helper.inputFile(
-                projectForm("image"), '_label -> "Bild", 'class -> "form-control"
-            )
+            @helper.inputText(projectForm("description"), '_label -> "Beschreibung", 'class -> "form-control")
             @helper.select(
                 field = projectForm("tmpcustomer"),
                 options = (customerList.map(customer => customer.getId.toString -> customer.getName())),

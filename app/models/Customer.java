@@ -16,9 +16,7 @@ public class Customer extends Model
     private Long id;
     
     private String name;
-    
-    private String password;
-    
+        
     @OneToMany(cascade = CascadeType.REMOVE)
     List<Project> projects;
     

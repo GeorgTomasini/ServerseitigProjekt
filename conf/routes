@@ -20,12 +20,13 @@ POST    /customer                            controllers.CustomerController.crea
 GET     /deletecustomer/:id                  controllers.CustomerController.delete(id: String)
 
 
+
 #Task
 GET     /task                               controllers.TaskController.list()
 GET     /task/:id                           controllers.TaskController.show(id: String)
 POST    /task                               controllers.TaskController.create()
 GET     /deletetask/:id                     controllers.TaskController.delete(id: String)
-
+POST    /modifytask/:id                     controllers.TaskController.modify(id: String)
 
 #Employee
 GET     /employee                             controllers.EmployeeController.list()

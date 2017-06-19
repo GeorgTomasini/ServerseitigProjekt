@@ -10,8 +10,8 @@
     <div class="row">
         <div class="col-xs-12">
         @helper.form(action = routes.TaskController.create(), 'enctype -> "multipart/form-data"){
-            @helper.inputText(taskForm("name"), 'id -> "name", '_label -> "Name", 'class -> "form-control")
-            @helper.inputText(taskForm("beschreibung"), '_label -> "Beschreibung", 'class -> "form-control")
+            @helper.inputText(taskForm("title"), 'id -> "name", '_label -> "Name", 'class -> "form-control")
+            @helper.inputText(taskForm("description"), '_label -> "Beschreibung", 'class -> "form-control")
             @helper.inputText(taskForm("duration"), '_label -> "Aufgabendauer(h)", 'class -> "form-control", 'type -> "number")
             @helper.select(
                 field = taskForm("tmpproject"),

@@ -42,5 +42,4 @@ public class FormController extends Controller
         Form<Employee> employeeForm = formFactory.form(Employee.class);
         return ok(views.html.addEmployee.render(employeeForm));
     }
-  
 }
